@@ -6,19 +6,30 @@ const ProfileSchema = new mongoose.Schema({
     ref: 'user'
   },
   company: {
-    type: String
+    type: String,
+    required: true
   },
   website: {
     type: String
   },
   location: {
-    type: String
-  },
-  status: {
     type: String,
     required: true
   },
-  skills: {
+  email: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: Number,
+    required: true
+  },
+  // Senior dev, Junior Dev, Team Lead, Student, Instructor, Product Manager
+  role: {
+    type: String,
+    required: true
+  },
+  skillset: {
     type: [String],
     required: true
   },
@@ -30,7 +41,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   experience: [
     {
-      title: {
+      jobtitle: {
         type: String,
         required: true
       },
@@ -38,14 +49,15 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      location: {
-        type: String
+      joblocation: {
+        type: String,
+        required: true
       },
-      from: {
+      fromdate: {
         type: Date,
         required: true
       },
-      to: {
+      todate: {
         type: Date
       },
       current: {
@@ -59,7 +71,15 @@ const ProfileSchema = new mongoose.Schema({
   ],
   education: [
     {
-      school: {
+      institutetype: {
+        type: String,
+        required: true
+      },
+      institutename: {
+        type: String,
+        required: true
+      },
+      university: {
         type: String,
         required: true
       },
@@ -71,11 +91,11 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      from: {
+      fromdate: {
         type: Date,
         required: true
       },
-      to: {
+      todate: {
         type: Date
       },
       current: {
@@ -110,4 +130,4 @@ const ProfileSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('profile', ProfileSchema);
+module.exports = Profile = mongoose.model('profile', ProfileSchema);
