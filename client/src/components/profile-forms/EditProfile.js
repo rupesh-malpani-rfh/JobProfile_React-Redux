@@ -1,11 +1,16 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { createProfile } from '../../actions/profile';
+import { createProfile, getCurrentProfile } from '../../actions/profile';
 
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({
+    createProfile,
+    history,
+    getCurrentProfile,
+    profile: { profile, loading }
+}) => {
     const [formData, setFormData] = useState({
         company: '',
         website: '',
@@ -22,6 +27,29 @@ const CreateProfile = ({ createProfile, history }) => {
         linkedin: '',
         instagram: ''
     });
+
+    useEffect(() => {
+        getCurrentProfile();
+        setFormData({
+            // if its loading OR there is no company then show blank or else
+            // show company name
+            company: loading || !profile.company ? '' : profile.company,
+            website: loading || !profile.website ? '' : profile.website,
+            location: loading || !profile.location ? '' : profile.location,
+            email: loading || !profile.email ? '' : profile.email,
+            phone: loading || !profile.phone ? '' : profile.phone,
+            role: loading || !profile.role ? '' : profile.role,
+            skillset: loading || !profile.skillset ? '' : profile.skillset.join(','),
+            bio: loading || !profile.bio ? '' : profile.bio,
+            githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
+            twitter: loading || !profile.social ? '' : profile.social.twitter,
+            facebook: loading || !profile.social ? '' : profile.social.facebook,
+            linkedin: loading || !profile.social ? '' : profile.social.linkedin,
+            youtube: loading || !profile.social ? '' : profile.social.youtube,
+            instagram: loading || !profile.social ? '' : profile.social.instagram,
+        })
+    }, [loading, getCurrentProfile]);
+
 
     const {
         company,
@@ -48,7 +76,8 @@ const CreateProfile = ({ createProfile, history }) => {
 
     const onSubmit = async e => {
         e.preventDefault();
-        createProfile(formData, history);
+        createProfile(formData, history, true);
+        history.push('/dashboard');
     }
 
     return (
@@ -187,8 +216,14 @@ const CreateProfile = ({ createProfile, history }) => {
     )
 }
 
-CreateProfile.propTypes = {
-    createProfile: PropTypes.func.isRequired
+EditProfile.propTypes = {
+    createProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired
 };
 
-export default connect(null, { createProfile })(withRouter(CreateProfile))
+const mapStateToProps = state => ({
+    profile: state.profile
+});
+
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile))
