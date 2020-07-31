@@ -28,6 +28,23 @@ const EditProfile = ({
         instagram: ''
     });
 
+    const {
+        company,
+        website,
+        location,
+        email,
+        phone,
+        role,
+        skillset,
+        bio,
+        githubusername,
+        twitter,
+        facebook,
+        youtube,
+        linkedin,
+        instagram
+    } = formData;
+
     useEffect(() => {
         getCurrentProfile();
         setFormData({
@@ -51,22 +68,7 @@ const EditProfile = ({
     }, [loading, getCurrentProfile]);
 
 
-    const {
-        company,
-        website,
-        location,
-        email,
-        phone,
-        role,
-        skillset,
-        bio,
-        githubusername,
-        twitter,
-        facebook,
-        youtube,
-        linkedin,
-        instagram
-    } = formData;
+
 
     const [socialInputs, toggleSocialInputs] = useState(false);
 
