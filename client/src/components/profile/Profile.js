@@ -7,6 +7,8 @@ import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import { getProfileById } from '../../actions/profile';
 import ProfileAbout from './ProfileAbout';
+import ProfileExperience from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
 
 const Profile = ({ match, getProfileById, profile: { profile, loading }, auth }) => {
     useEffect(() => {
@@ -25,6 +27,8 @@ const Profile = ({ match, getProfileById, profile: { profile, loading }, auth })
                 <div className="profile-container">
                     <ProfileTop profile={profile} />
                     <ProfileAbout profile={profile} />
+                    <ProfileExperience profile={profile} />
+                    <ProfileEducation profile={profile} />
                 </div>
             </Fragment>}
         </Fragment>
