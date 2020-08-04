@@ -18,7 +18,7 @@ const ProfileAbout = ({
             <h2 className="text-primary">Skill Set</h2>
             <div className="skills">
                 {skillset.slice(0, 7).map((skill, index) => (
-                    <div key={index} className="p-1">
+                    <div key={index} className="p-1 animate__animated animate__backInDown animate__delay-2s">
                         <i className="fas fa-check" style={{ marginRight: '5px' }}></i>
                         {skill}
                     </div>

@@ -14,10 +14,11 @@ const Profile = ({ match, getProfileById, profile: { profile, loading }, auth })
     useEffect(() => {
         getProfileById(match.params.id);
     }, [getProfileById, match.params.id]);
+
     return (
         <Fragment>
             {profile === null || loading ? <Spinner /> : <Fragment>
-                <Link to='/profiles' className="btn">Back to Profiles</Link>
+                <Link to='/profiles' className="btn animate__animated animate__bounce animate__slow">Back to Profiles</Link>
                 {
                     auth.isAuthenticated && auth.loading === false && auth.user._id ===
                     profile.user._id && <Link to='/edit-profile' className="btn btn-dark">
